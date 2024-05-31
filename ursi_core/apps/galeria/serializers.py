@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Carpeta, Imagen, Video, Archivo
 
 class CarpetaSerializer(serializers.ModelSerializer):
-    usuario = serializers.CharField(source='get_disciplina')(source='get_usuario')
+    usuario = serializers.CharField(source='get_usuario')
 
     class Meta:
         model=Carpeta

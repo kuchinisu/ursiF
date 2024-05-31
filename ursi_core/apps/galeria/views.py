@@ -1,4 +1,3 @@
-from nis import cat
 from os import error
 import stat
 from tkinter import Image

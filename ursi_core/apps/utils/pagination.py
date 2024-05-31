@@ -1,5 +1,4 @@
 from rest_framework.pagination import PageNumberPagination
-from ursi_core.apps.user.models import UserAccount
 
 
 class SmallSetPagination(PageNumberPagination):

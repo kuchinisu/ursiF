@@ -1,6 +1,6 @@
 from django.urls import path
 
-from ursi_core.apps.galeria.views import (
+from apps.galeria.views import (
     ArchivosView, CarpetasView, 
     CrearCarpeta, ImagenesView, 
     SubirArchivo, SubirImagen, 
