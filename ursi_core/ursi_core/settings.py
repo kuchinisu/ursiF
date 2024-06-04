@@ -90,16 +90,19 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 CORS_ORIGIN_WHITELIST = [
-    "https://ursifi.vercel.app",
-]
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:3000',
+    ]
+
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
-    'https://ursifi.vercel.app/',
-]
+    ]
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
