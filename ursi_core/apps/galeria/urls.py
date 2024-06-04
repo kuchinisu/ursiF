@@ -2,9 +2,9 @@ from django.urls import path
 
 from apps.galeria.views import (
     ArchivosView, CarpetaSlugView, CarpetasView, 
-    CrearCarpeta, CrearSubCarpeta, EditarPrivasidadCarpeta, GetPrivasidadCarpeta, ImagenesView, 
+    CrearCarpeta, CrearSubCarpeta, EditarAccesoCarpeta, EditarPrivasidadCarpeta, GetPrivasidadCarpeta, ImagenesView, 
     SubirArchivo, SubirImagen, 
-    SubirVideo, VideosView,
+    SubirVideo, VideosView, GetAccesoCarpeta
     )
 
 urlpatterns = [
@@ -14,7 +14,11 @@ urlpatterns = [
     path('lista/archivos/<carpeta_slug>/', ArchivosView.as_view()),
 
     path('carpeta/slug/<slug>/', CarpetaSlugView.as_view()),
+   
     path('privacidad/carpeta/slug/<slug>/', GetPrivasidadCarpeta.as_view()),
+    path('editar/accesibilidad/carpeta/slug/<slug>/', EditarAccesoCarpeta.as_view()),
+    path('get/accesibilidad/carpeta/slug/<slug>/', GetAccesoCarpeta.as_view()),
+
     path('editar/carpeta/<slug>/', EditarPrivasidadCarpeta.as_view()),
 
     path('crear/carpeta/', CrearCarpeta.as_view()),

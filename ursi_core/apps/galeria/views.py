@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+
 from urllib3 import Retry
 from apps.utils.pagination import LargeSetPagination
 from django.utils import timezone
@@ -161,7 +162,36 @@ class EditarPrivasidadCarpeta(APIView):
         
         return Response({'mensaje':'privasidad de la carpeta cambiada con exito'}, status=status.HTTP_200_OK)
     
+
+class EditarAccesoCarpeta(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, slug, format=None):
+        pass
+    
+    def post(self, request, slug, format=None):
+        user = request.user
+        data = request.data
+
+        accesible_para = data.get('accesible_para')
+        print(accesible_para)
+        carpeta = get_object_or_404(Carpeta, slug=slug, usuario=user)
+
+        carpeta.accesible_para = accesible_para
+        carpeta.save()
+
+        return Response({'mensaje':'la accecibilidad de la carpeta se a editado correctamente'}, status=status.HTTP_200_OK)
         
+class GetAccesoCarpeta(APIView):
+    permission_classes=[IsAuthenticated]
+    def get(self, request, slug, format):
+
+        carpeta = get_object_or_404(Carpeta, slug=slug)
+
+        accesible_para = carpeta.accesible_para
+
+        return Response({'accesible_para':accesible_para}, status=status.HTTP_200_OK)
+
 class GetPrivasidadCarpeta(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, slug, format=None):

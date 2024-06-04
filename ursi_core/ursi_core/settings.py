@@ -21,7 +21,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-     'corsheaders',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -90,10 +90,7 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://127.0.0.1:3000',
+    "https://ursifi.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -101,6 +98,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
+    'https://ursifi.vercel.app/',
 ]
 
 PASSWORD_HASHERS = [
