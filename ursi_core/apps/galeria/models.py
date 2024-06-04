@@ -5,26 +5,36 @@ import os
 from apps.user.models import UserAccount
 from django.utils.text import slugify
 
+import uuid
+import os
+
 def path_dir(instance, filename):
     ext = filename.split('.')[-1]
     nombre_archivo = f"{uuid.uuid4()}.{ext}"
     
     ubicacion = instance.carpeta.ubicacion or ""
     nombre = instance.nombre
-    usuario = f'{instance.usuario.nombre}_{instance.usuario.matricula}'
+    usuario = f'{instance.carpeta.usuario.nombre}_{instance.carpeta.usuario.matricula}'
     carpeta = instance.carpeta.nombre
-    ruta_completa = os.path.join(usuario, ubicacion, nombre, carpeta, nombre_archivo)
+    
+    ubicacion_parts = ubicacion.split('/')
+    nombre_parts = nombre.split('/')
+    usuario_parts = usuario.split('/')
+    carpeta_parts = carpeta.split('/')
+    
+    ruta_completa = os.path.join(*usuario_parts, *ubicacion_parts, *carpeta_parts, *nombre_parts, nombre_archivo)
     
     print(ruta_completa)  
     
     return ruta_completa
+
 
 class Carpeta(models.Model):
     nombre = models.CharField(max_length=50)
     usuario = models.ForeignKey(UserAccount, related_name='carpeta_usuario', on_delete=models.CASCADE)
     publica = models.BooleanField(default=False)
     ubicacion = models.CharField(max_length=255, blank=True)
-    slug = models.SlugField(unique=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(unique=True, default=uuid.uuid4, editable=True)
     
     OPCIONES_DE_ACCESIBILIDAD = (
         ('todos', 'todos'),
@@ -59,6 +69,8 @@ class Imagen(models.Model):
         if self.carpeta:
             return self.carpeta.slug
         return  ''
+    
+    #usuario
 class Video(models.Model):
     nombre = models.CharField(max_length=250)
     video = models.FileField(upload_to=path_dir)
